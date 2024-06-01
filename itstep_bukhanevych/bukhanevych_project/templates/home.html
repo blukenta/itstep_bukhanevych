@@ -1,0 +1,47 @@
+{% extends "base.html" %} {% block title %} To-Do List {% endblock %}
+{% block content %}
+{% load icons %}
+<main>
+    <section>
+        <h1>To-Do List</h1>
+        <hr>
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group me-2" role="group" aria-label="First group">
+                <button type="button" class="btn btn-primary" id="create_icon">{% icon 'plus' %} New Task</button>
+            </div>
+            <div class="ml-3">
+                <button type="button" class="btn btn-outline-secondary">{% icon 'filter' %} Filters</button>
+            </div>
+        </div>
+        <form class="mt-4" method="POST" action="create" id="create" style="display: none;" >
+            {% csrf_token %} {{ add_todo.as_p }}
+            {{captcha.captcha}}
+            <br>
+            <button type="submit" class="btn btn-primary">Create task</button>
+        </form>
+    </section>
+    <section>
+            {% for todo in todos %}
+                <div class="card mt-5" style="width: auto;">
+                    <div class="card-body">
+                    <form action="change" method="POST" id="myForm_{{todo.id}}">
+                        <div class="form-check form-check-lg">
+                            <input {% if todo.completed %} checked {% else %} {% endif %} class="form-check-input" type="checkbox" id="{{todo.id}}" name="checkbox" onchange="submitForm('checkbox_value_{{todo.id}}','{{todo.id}}', 'myForm_{{todo.id}}')">
+                            <input name="id" value="{{todo.id}}" style="display: none;">
+                            <input name="checkbox_value_{{todo.id}}" value="{{todo.id}}" style="display: none;">
+                            {% csrf_token %}
+                            <label class="form-check-label ml-4 mt-1" for="{{todo.id}}">
+                                <h5 class="card-title">{{todo.title}}</h5>
+                            </label>
+                        </div>
+                        <div> {% if todo.completed %}Completed{% else %}Not completed{% endif %} </div>
+                    </form>
+                    </div>
+                    <div class="m-3">
+                        <button type="button" class="btn btn-outline-secondary">{% icon 'calendar' %} {{todo.date}}</button>
+                    </div>
+                </div>
+            {% endfor %}
+    </section>
+</main>
+{% endblock %}

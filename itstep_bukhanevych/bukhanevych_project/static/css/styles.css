@@ -1,0 +1,51 @@
+* {
+    font-family: Montserrat, sans-serif;
+}
+
+body {
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+h1 {
+    font-weight: 700;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 1em;
+}
+
+main {
+    padding: 2em;
+}
+
+footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    padding: 32px;
+    margin-top: 21px;
+}
+
+.form-check-lg .form-check-input {
+    width: 24px;
+    height: 24px;
+}
